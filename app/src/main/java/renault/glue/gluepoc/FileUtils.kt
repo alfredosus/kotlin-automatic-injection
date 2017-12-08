@@ -21,6 +21,7 @@ class FileUtils(private var context: Context) {
         val content = context.assets.open(fileName).bufferedReader().use {
             it.readText()
         }
+
         val gson = GsonBuilder().setPrettyPrinting().create()
         val personMap: Map<String, Any> = gson.fromJson(content, object : TypeToken<Map<String, Any>>() {}.type)
         Timber.d(personMap.toString())
