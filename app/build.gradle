@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "renault.glue.gluepoc"
+        minSdkVersion 19
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+
+}
+
+dependencies {
+
+    kapt 'com.android.databinding:compiler:2.3.3'
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+
+    // Architecture components
+    implementation "android.arch.lifecycle:runtime:$rootProject.arch"
+    implementation "android.arch.lifecycle:extensions:$rootProject.arch"
+    kapt "android.arch.lifecycle:compiler:$rootProject.arch"
+    implementation "android.arch.persistence.room:runtime:$rootProject.arch"
+    kapt "android.arch.persistence.room:compiler:$rootProject.arch"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.arch"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rx_android"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$rootProject.kotlin"
+
+    //dagger
+    implementation "com.google.dagger:dagger:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android:$rootProject.dagger"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    //annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger"
+    //annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger"
+
+
+
+    //network
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+
+    //gson
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+
+    implementation "com.commonsware.cwac:saferoom:0.1.3"
+
+    //Java 8 streams compatibility
+    implementation group: 'com.annimon', name: 'stream', version: '1.1.8'
+
+    //Stetho
+    debugImplementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
+
+    //Loggin
+    implementation 'com.jakewharton.timber:timber:4.6.0'
+}
